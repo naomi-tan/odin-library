@@ -16,6 +16,14 @@ function addBook(book) {
 
 function displayLibrary() {
     // Write a function that loops through the array and displays each book on the page. You can display them in some sort of table, or each on their own “card”
+    // get .library div
+    let library = document.querySelector('.library');
+    for (let book of myLibrary) {
+        book = document.createElement('div');
+        book.classList.add('book');
+        library.appendChild(book);
+        console.log(book);
+    }
 }
 
 testBook1 = new Book('Phillip Pullman', 'Northern Lights', 448, true);
@@ -26,4 +34,4 @@ addBook(testBook1);
 addBook(testBook2);
 addBook(testBook3);
 
-console.log(myLibrary);
+displayLibrary();

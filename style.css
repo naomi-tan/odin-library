@@ -1,0 +1,7 @@
+.book {
+    width: 50px;
+    height: 200px;
+    background-color: azure;
+    margin: 10px;
+    border: 1px solid black;
+}
