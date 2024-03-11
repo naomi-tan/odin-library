@@ -12,6 +12,7 @@ function Book(author, title, pages, read) {
 function addBook(book) {
     // add a function to the script (not the constructor) that can take user’s input and store the new book objects into an array
     myLibrary.push(book);
+    console.log(`${book.title} was added to the library`);
 }
 
 function displayLibrary() {
@@ -26,6 +27,16 @@ function displayLibrary() {
     }
 }
 
+function openModal() {
+    modal.showModal();
+}
+
+function closeModal() {
+    modal.close();
+}
+
+// TEST CODE
+
 testBook1 = new Book('Phillip Pullman', 'Northern Lights', 448, true);
 testBook2 = new Book('Phillip Pullman', 'The Subtle Knife', 368, true);
 testBook3 = new Book('Phillip Pullman', 'The Amber Spyglass', 544, false);
@@ -34,4 +45,17 @@ addBook(testBook1);
 addBook(testBook2);
 addBook(testBook3);
 
+// MAIN CODE
+
 displayLibrary();
+
+modal = document.querySelector('dialog');
+
+newBookButton = document.querySelector('.new-book');
+newBookButton.addEventListener('click', openModal);
+
+okModalButton = document.querySelector('.ok-button');
+okModalButton.addEventListener('click', closeModal)
+
+closeModalButton = document.querySelector('.cancel-button');
+closeModalButton.addEventListener('click', closeModal)
