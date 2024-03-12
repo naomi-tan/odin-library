@@ -1,7 +1,24 @@
+.library {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: min-content;
+    justify-content: start;
+    align-items: baseline;
+}
+
 .book {
-    width: 50px;
-    height: 200px;
+    width: max-content;
+    height: max-content;
     background-color: azure;
     margin: 10px;
     border: 1px solid black;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    transform: rotate(180deg);
+}
+
+.book p {
+    writing-mode: vertical-rl;
+    margin: 0px;
+    padding: 0px;
 }
