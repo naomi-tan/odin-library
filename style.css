@@ -3,7 +3,7 @@
     grid-auto-flow: column;
     grid-template-columns: min-content;
     justify-content: start;
-    align-items: baseline;
+    align-items:end;
 }
 
 .book {
@@ -14,11 +14,20 @@
     border: 1px solid black;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    transform: rotate(180deg);
+    /* transform: rotate(180deg); */
 }
 
 .book p {
     writing-mode: vertical-rl;
     margin: 0px;
     padding: 0px;
+    transform: rotate(180deg);
+}
+
+form {
+    display: grid;
+}
+
+button {
+    cursor: pointer;
 }

@@ -1,5 +1,3 @@
-const myLibrary = [] // All of your book objects are going to be stored in an array
-
 // Object constructor
 function Book(author, title, pages, read) {
     // details for the new book: author, title, number of pages, whether it’s been read and anything else you might want
@@ -26,22 +24,53 @@ function displayLibrary() {
     // Write a function that loops through the array and displays each book on the page. You can display them in some sort of table, or each on their own “card”
     // get .library div
     clearLibrary();
+    let i = 0;
     for (let book of myLibrary) {
-        bookNode = document.createElement('div');
+        bookNode = document.createElement('button');
         bookNode.classList.add('book');
+        bookNode.setAttribute('index', i);
         displayTitle = document.createElement('p');
         displayTitle.textContent = book.title;
         displayAuthor = document.createElement('p');
         displayAuthor.textContent = book.author;
-        bookNode.appendChild(displayAuthor);
+        deleteButton = document.createElement('button');
+        deleteButton.classList.add('delete-button');
+        deleteButton.setAttribute('type', 'button');
+        deleteButton.textContent = 'Delete';
+        readCheckbox = document.createElement('input');
+        readCheckbox.setAttribute('type', 'checkbox');
+        readCheckbox.id = `markRead${i}`;
+        readCheckbox.classList.add('read-checkbox');
+        readLabel = document.createElement('label');
+        readLabel.setAttribute('for', `markRead${i}`);
+        readLabel.textContent = 'Read:'
         bookNode.appendChild(displayTitle);
+        bookNode.appendChild(displayAuthor);
+        bookNode.appendChild(deleteButton);
+        bookNode.appendChild(readLabel);
+        bookNode.appendChild(readCheckbox);
         library.appendChild(bookNode);
-        console.log(book);
+        bookNode.addEventListener('click', openBook);
+        let deleteModalButtons = document.querySelectorAll('.delete-button');
+        for(let i = 0; i < deleteModalButtons.length; ++i) {
+            deleteModalButtons[i].addEventListener('click', deletePressed);
+        }
+        let readCheckboxes = document.querySelectorAll('.read-checkbox');
+        for(let i = 0; i < readCheckboxes.length; ++i) {
+            readCheckboxes[i].addEventListener('click', readPressed);
+        }
+        ++i;
     }
 }
 
 function openModal() {
     modal.showModal();
+}
+
+function openBook() {
+    openModal();
+    // disable all inputs
+    // fill input values with book info
 }
 
 function okPressed(event) {
@@ -56,9 +85,26 @@ function okPressed(event) {
     closeModal();
 }
 
+function deletePressed(event) {
+    index = event.currentTarget.parentNode.getAttribute('index');
+    console.log(`${myLibrary[index].title} was removed from the library`);
+    myLibrary.splice(index, 1);
+    event.stopPropagation();
+    displayLibrary();
+}
+
+function readPressed(event) {
+    index = event.currentTarget.parentNode.getAttribute('index');
+    console.log(`${myLibrary[index].title} was read`);
+    event.stopPropagation();
+    // update read object value
+}
+
 function closeModal() {
     modal.close();
 }
+
+const myLibrary = [] // All of your book objects are going to be stored in an array
 
 // TEST CODE
 
@@ -76,13 +122,13 @@ let library = document.querySelector('.library');
 
 displayLibrary();
 
-modal = document.querySelector('dialog');
+let modal = document.querySelector('dialog');
 
-newBookButton = document.querySelector('.new-book');
+let newBookButton = document.querySelector('.new-book');
 newBookButton.addEventListener('click', openModal);
 
-okModalButton = document.querySelector('.ok-button');
+let okModalButton = document.querySelector('.ok-button');
 okModalButton.addEventListener('click', okPressed);
 
-closeModalButton = document.querySelector('.cancel-button');
-closeModalButton.addEventListener('click', closeModal);
+let cancelModalButton = document.querySelector('.cancel-button');
+cancelModalButton.addEventListener('click', closeModal);
